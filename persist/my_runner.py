@@ -1,4 +1,5 @@
 import os
+import signal
 import subprocess
 import sys
 import threading
@@ -36,10 +37,14 @@ class MyRunner:
       return
     try:
       pgid = os.getpgid(self.subprocess.pid)
-      print('Killing process: ', self.subprocess.pid, ' pgid: ', pgid)
+      print('Killing process: ', self.subprocess.pid, ' pgid: ', pgid, ' from thread: ', threading.get_ident(), ' aka: ', threading.current_thread().name)
       os.killpg(os.getpgid(self.subprocess.pid), signal.SIGTERM)
     except ProcessLookupError:
       print('Process: ', self.subprocess.pid, ' already gone.')
+    except Exception as e:
+      print('Caught exception: ', e)
+      raise
+    print('Done killing from thread: ', threading.get_ident(), ' aka: ', threading.current_thread().name)
 
     try:
       self.subprocess.wait(timeout=5)
