@@ -63,7 +63,7 @@ class MyRunner:
         self.kill_subprocess()
       self.subprocess = subprocess.Popen(self.cmd, preexec_fn=os.setsid)
       my_subprocess = self.subprocess
-      print('Starting subprocess: ', self.subprocess.pid)
+      print('Starting subprocess: ', self.subprocess.pid, ' ', ' '.join(self.cmd))
     my_subprocess.communicate()
     print('Process: ', my_subprocess.pid, ' exited.')
 
