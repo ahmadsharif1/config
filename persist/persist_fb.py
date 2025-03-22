@@ -26,7 +26,7 @@ def Main(argv):
         "--patterns",
         type=str,
         nargs="+",
-        default=["**/*.cpp", "**/*.h", "**/*.py", "**/TARGETS"],
+        default=["**/*.cpp", "**/*.h", "**/*.py", "**/*.cu", "**/TARGETS"],
         help="Patterns to match",
     )
     parser.add_argument("--root", type=str, default=".", help="Root directory to watch")
